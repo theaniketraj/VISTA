@@ -2,6 +2,14 @@
 
 **VISTA** (*Version Increment and Semantic Tracking Automation*) is a CLI Gradle plugin that automates project version management using a `version.properties` file.
 
+## **Table of Contents**
+
+1. [Features](#features)
+2. [Getting Started](#getting-started)
+3. [Usage](#usage)
+4. [Project Structure](#project-structure)
+5. [License](#license)
+
 ## Features
 
 - **Automated Version Management:** Increment build numbers automatically.
@@ -24,3 +32,18 @@ plugins {
     id("com.example.vista.versioning") version "1.0.0"
 }
 ```
+
+Then run the version increment task:
+```bash
+./gradlew incrementVersion
+```
+
+### Project Structure
+
+- vista-plugin/: Contains the CLI Gradle plugin code and publishing configuration.
+- version.properties: Holds the versioning information.
+- gradle/, settings.gradle.kts, gradle.properties: Global project configuration files.
+
+### License
+
+[MIT](https://github.com/theaniketraj/VISTA/blob/main/LICENSE)
