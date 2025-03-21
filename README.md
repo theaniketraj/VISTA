@@ -27,6 +27,7 @@
 ### Usage
 
 Apply the plugin in your Gradle build:
+
 ```kotlin
 plugins {
     id("com.example.vista.versioning") version "1.0.0"
@@ -34,6 +35,7 @@ plugins {
 ```
 
 Then run the version increment task:
+
 ```bash
 ./gradlew incrementVersion
 ```
