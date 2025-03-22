@@ -1,28 +1,25 @@
 package com.example.vista
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
+import org.gradle.api.DefaultTask
 import java.io.File
 import java.util.Properties
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
 class VersioningPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         // Register a task to increment the version based on version.properties.
-        target.tasks.register("incrementVersion") {
-            doLast {
+        target.tasks.register("incrementVersion", DefaultTask::class.java) {
+            (this as DefaultTask).doLast {
                 val versionFile = File(target.rootDir, "version.properties")
                 if (!versionFile.exists()) {
                     println("⚠️ version.properties not found in ${target.rootDir.absolutePath}")
                     return@doLast
                 }
-                val properties = Properties().apply { 
-                    versionFile.inputStream().use { load(it) }
-                }
+                val properties = Properties().apply { versionFile.inputStream().use { load(it) } }
                 val buildNumber = properties.getProperty("BUILD_NUMBER", "0").toInt() + 1
                 properties.setProperty("BUILD_NUMBER", buildNumber.toString())
-                versionFile.bufferedWriter().use { writer ->
-                    properties.store(writer, null)
-                }
+                versionFile.bufferedWriter().use { writer -> properties.store(writer, null) }
                 println("✅ Updated build number to: $buildNumber")
             }
         }
