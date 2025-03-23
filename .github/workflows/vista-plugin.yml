@@ -1,0 +1,73 @@
+name: VISTA CI/CD
+
+on:
+  push:
+    branches:
+      - main  
+    tags:
+      - "v*.*.*"  # Only publish on versioned tags (e.g., v1.0.0)
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build the VISTA plugin
+        run: ./gradlew :vista-plugin:build
+
+      - name: Publish to Maven Local (for testing)
+        run: ./gradlew :vista-plugin:publishToMavenLocal
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: vista-plugin-build
+          path: vista-plugin/build/libs/
+
+  # Optional publishing job
+  publish:
+    name: Publish to Gradle Plugin Portal
+    runs-on: ubuntu-latest
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')  # Only publish on versioned tags
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Publish to Gradle Plugin Portal
+        run: ./gradlew :vista-plugin:publishPlugins
+        env:
+          GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
+          GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
