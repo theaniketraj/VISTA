@@ -18,7 +18,7 @@ version = "1.0.0"
 gradlePlugin {
     plugins {
         create("versioningPlugin") {
-            id = "com.example.vista.versioning"
+            id = "com.example.vista.versioning.properties"
             implementationClass = "com.example.vista.VersioningPlugin"
             displayName = "VISTA Versioning Plugin"
             description = "A CLI Gradle plugin that automates version management using a version.properties file."
