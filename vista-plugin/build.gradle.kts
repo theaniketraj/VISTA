@@ -24,6 +24,8 @@ gradlePlugin {
             description = "A CLI Gradle plugin that automates version management using a version.properties file."
         }
     }
+    website = "https://github.com/theaniketraj/vista"
+    vcsUrl = "https://github.com/theaniketraj/vista.git"
 }
 
 tasks.withType<Copy>().configureEach {
