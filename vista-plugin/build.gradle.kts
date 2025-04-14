@@ -21,6 +21,8 @@ gradlePlugin {
             id = "com.example.vista.versioning.properties"
             implementationClass = "com.example.vista.VersioningPlugin"
             displayName = "VISTA Versioning Plugin"
+            website = "https://github.com/theaniketraj/VISTA/blob/main/README.md"
+            vcsUrl = "https://github.com/theaniketraj/VISTA.git"
             description = "A CLI Gradle plugin that automates version management using a version.properties file."
             tags.set(listOf("versioning", "gradle", "plugin", "automation", "cli"))
         }
