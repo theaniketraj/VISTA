@@ -1,6 +1,6 @@
 # VISTA
 
-**VISTA** *(Version Increment and Semantic Tracking Automation)* is a CLI Gradle plugin designed to automate project version management using a `version.properties` file. Originally developed as part of the Controlled Environment Integration Engine (CEIE) ecosystem, VISTA represents the evolution of our versioning strategy—from initial automation (CEIE 1.0) through enhanced CLI capabilities (CEIE 2.0), GUI integration (CEIE 3.0), and finally, a focused CLI solution (CEIE 4.0: VISTA).
+**VISTA** *(Version Increment and Semantic Tracking Automation)* is a CLI Gradle plugin designed to automate project version management using a `version.properties` file. Originally developed as part of the Controlled Environment Integration Engine (CEIE) ecosystem, VISTA represents the evolution of our versioning strategy—from initial automation (CEIE 1.0) through enhanced CLI capabilities (CEIE 2.0), (CEIE 3.0), and finally, a focused CLI solution (CEIE 4.0: VISTA).
 
 ---
 
@@ -33,9 +33,9 @@
   
 - **Evolution from CEIE:**  
   VISTA is the culmination of enhancements made across the CEIE series:
-  - **CEIE 1.0:** Initial automation and Git-integrated version tracking.
-  - **CEIE 2.0:** Introduction of CLI tools and incremental version scaffolding.
-  - **CEIE 3.0:** GUI (ReFlow) integration for enhanced project visualization.
+  - **[CEIE 1.0](https://github.com/theaniketraj/git-setup-ceie):** Initial automation and Git-integrated version tracking.
+  - **[CEIE 2.0](https://github.com/theaniketraj/ceie):** Introduction of CLI tools and incremental version scaffolding.
+  - **CEIE 3.0:** TBD
   - **CEIE 4.0:** Dedicated, streamlined CLI plugin—VISTA—for robust version management.
 
 ---
@@ -74,7 +74,7 @@ VISTA is built as a Gradle plugin with the following key components:
 
 2. **Clone the Repository:**  
    ```bash
-   git clone https://github.com/yourusername/VISTA.git
+   git clone https://github.com/theaniketraj/VISTA.git
    cd VISTA
    ```
 
