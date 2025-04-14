@@ -6,6 +6,7 @@ import org.gradle.api.Project
 import java.io.File
 import java.util.Properties
 
+
 class VersioningPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         // Register a task to increment the version using the version.properties file
