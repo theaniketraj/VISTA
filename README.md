@@ -11,10 +11,9 @@
 3. [Getting Started](#getting-started)
 4. [Usage](#usage)
 5. [Project Structure](#project-structure)
-6. [Plugin Publishing](#plugin-publishing)
-7. [Versioning Philosophy](#versioning-philosophy)
-8. [Contributing](#contributing)
-9. [License](#license)
+6. [Versioning Philosophy](#versioning-philosophy)
+7. [Contributing](#contributing)
+8. [License](#license)
 
 ---
 
@@ -103,3 +102,60 @@ This task will:
 - Look for a ```version.properties``` file in the root of your project.
 - Increment the ```BUILD_NUMBER``` property.
 - Save the updated version information.
+
+---
+
+## Project Structure
+```pgsql
+VISTA/
+├── vista-plugin/                // VISTA Gradle Plugin module
+│   ├── build.gradle.kts         // Plugin module build script (plugin & publishing configuration)
+│   ├── src/
+│   │   └── main/
+│   │       └── kotlin/
+│   │           └── com/example/vista/
+│   │                   └── VersioningPlugin.kt  // Plugin implementation
+│   └── src/main/resources/
+│       └── META-INF/
+│           └── gradle-plugins/
+│               └── com.example.vista.versioning.properties  // Plugin descriptor
+├── gradle/                      // Gradle wrapper files
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── settings.gradle.kts          // Project settings & module inclusion
+├── gradle.properties            // Global Gradle configuration (JVM args, code style, etc.)
+├── version.properties           // Version configuration file (used by the plugin)
+├── README.md                    // This documentation file
+└── .gitignore                   // Git ignore settings
+```
+### Key Points in the Structure:
+- vista-plugin/: Contains the source code and publishing configuration for the VISTA Gradle plugin.
+- version.properties: Maintains the current version details (used by VISTA to increment version numbers).
+- Gradle Wrapper & Settings: Ensure a consistent build environment and repository configuration
+
+---
+
+## Versioning Philosophy
+VISTA uses a simple yet robust versioning strategy:
+- Semantic Versioning:
+```VERSION_MAJOR```,```VERSION_MINOR```,```VERSION_PATCH``` combined with an incrementing ```BUILD_NUMBER``` to create a complete version string.
+- Autumation:
+The ```incrementVersion``` task updates the build number automatically - minimizing human error.
+- Integrability:
+Designed to work seamlessly with CI/CD pipelines for consistent version updates in each build.
+
+---
+
+## Contributing
+Contributions are welcome! Please follow these guidelines:
+- Fork the Repository and create a new branch for your changes.
+- Ensure Code Quality:
+Adhere to the Kotlin code style (official) and ensure all tests pass.
+- Submit a Pull Request:
+Include a detailed description of your changes and follow the project's commit conventions.
+
+---
+
+## License
+This project is licensed under the [MIT License](https://github.com/theaniketraj/VISTA/blob/main/LICENSE)
