@@ -1,3 +1,4 @@
+# This is a GitHub Actions workflow file for the VISTA plugin CI/CD pipeline.
 name: VISTA CI/CD
 
 on:
