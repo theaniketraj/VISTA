@@ -24,7 +24,7 @@ gradlePlugin {
             website = "https://github.com/theaniketraj/VISTA/blob/main/README.md"
             vcsUrl = "https://github.com/theaniketraj/VISTA.git"
             description = "A CLI Gradle plugin that automates version management using a version.properties file."
-            tags.set(listOf("versioning", "gradle", "plugin", "automation", "cli"))
+            tags.set(listOf("versioning", "automation", "ceie", "cvm", "cli"))
         }
     }
 }
