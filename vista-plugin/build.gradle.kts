@@ -15,7 +15,6 @@ version = "1.0.0"
 gradlePlugin {
     website.set("https://github.com/theaniketraj/vista")
     vcsUrl.set("https://github.com/theaniketraj/vista.git")
-    tags.set(listOf("versioning", "gradle", "automation", "cli"))
 
     plugins {
         create("versioningPlugin") {
