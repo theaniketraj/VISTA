@@ -9,16 +9,18 @@ plugins {
     kotlin("jvm")
 }
 
-group = "com.example.vista"
+group = "io.github.theaniketraj"
 version = "1.0.0"
 
 gradlePlugin {
     website.set("https://github.com/theaniketraj/vista")
     vcsUrl.set("https://github.com/theaniketraj/vista.git")
+    tags.set(listOf("versioning", "gradle", "automation", "cli"))
 
     plugins {
         create("versioningPlugin") {
-            id = "com.example.vista.versioning.properties"
+            id = "io.github.theaniketraj.vista"
+            displayName = "VISTA Versioning Plugin"
             implementationClass = "com.example.vista.VersioningPlugin"
             displayName = "VISTA Versioning Plugin"
             website = "https://github.com/theaniketraj/VISTA/blob/main/README.md"
