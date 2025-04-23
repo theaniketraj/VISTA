@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.github.theaniketraj"
-version = "1.0.0"
+version = "1.0.7"
 
 gradlePlugin {
     website.set("https://github.com/theaniketraj/vista")
@@ -19,6 +19,7 @@ gradlePlugin {
     plugins {
         create("versioningPlugin") {
             id = "io.github.theaniketraj.vista"
+            version = "1.0.7"
             displayName = "VISTA Versioning Plugin"
             implementationClass = "com.example.vista.VersioningPlugin"
             displayName = "VISTA Versioning Plugin"
