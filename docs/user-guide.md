@@ -85,12 +85,12 @@ tasks.named("incrementVersion") {
 
 ### Property Descriptions
 
-| Property | Purpose | When to Update | Example |
-|----------|---------|----------------|---------|
-| `VERSION_MAJOR` | Breaking changes | API changes, major refactoring | `1` → `2` |
-| `VERSION_MINOR` | New features | New functionality, enhancements | `1` → `2` |
-| `VERSION_PATCH` | Bug fixes | Patches, minor fixes | `0` → `1` |
-| `BUILD_NUMBER` | Build tracking | Automatically by VISTA | `1` → `2` |
+| Property        | Purpose          | When to Update                  | Example   |
+| --------------- | ---------------- | ------------------------------- | --------- |
+| `VERSION_MAJOR` | Breaking changes | API changes, major refactoring  | `1` → `2` |
+| `VERSION_MINOR` | New features     | New functionality, enhancements | `1` → `2` |
+| `VERSION_PATCH` | Bug fixes        | Patches, minor fixes            | `0` → `1` |
+| `BUILD_NUMBER`  | Build tracking   | Automatically by VISTA          | `1` → `2` |
 
 ### Manual Version Updates
 

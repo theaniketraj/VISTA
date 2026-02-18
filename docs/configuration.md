@@ -56,11 +56,11 @@ tasks.register("customVersionIncrement") {
         val properties = Properties().apply {
             versionFile.inputStream().use { load(it) }
         }
-        
+
         // Custom property mapping
         val customBuildNumber = properties.getProperty("CUSTOM_BUILD", "0").toInt() + 1
         properties.setProperty("CUSTOM_BUILD", customBuildNumber.toString())
-        
+
         versionFile.outputStream().use { properties.store(it, null) }
         println("Updated custom build number to: $customBuildNumber")
     }
@@ -99,21 +99,21 @@ Customize the `incrementVersion` task behavior:
 tasks.named("incrementVersion") {
     group = "versioning"
     description = "Increments the build number in version.properties"
-    
+
     // Add custom actions
     doFirst {
         println("Starting version increment...")
     }
-    
+
     doLast {
         println("Version increment completed!")
-        
+
         // Custom post-increment actions
         val versionFile = file("version.properties")
         val properties = Properties().apply {
             versionFile.inputStream().use { load(it) }
         }
-        
+
         val fullVersion = "${properties["VERSION_MAJOR"]}.${properties["VERSION_MINOR"]}.${properties["VERSION_PATCH"]}.${properties["BUILD_NUMBER"]}"
         println("New full version: $fullVersion")
     }
@@ -135,9 +135,9 @@ tasks.named("incrementVersion") {
 // Or create a conditional wrapper task
 tasks.register("incrementVersionIfNeeded") {
     dependsOn("incrementVersion")
-    
+
     onlyIf {
-        val shouldIncrement = project.hasProperty("increment") || 
+        val shouldIncrement = project.hasProperty("increment") ||
                             System.getenv("AUTO_INCREMENT") == "true"
         shouldIncrement
     }
@@ -152,17 +152,17 @@ Create tasks with custom increment logic:
 tasks.register("incrementPatch") {
     group = "versioning"
     description = "Increments the patch version"
-    
+
     doLast {
         val versionFile = file("version.properties")
         val properties = Properties().apply {
             versionFile.inputStream().use { load(it) }
         }
-        
+
         val currentPatch = properties.getProperty("VERSION_PATCH", "0").toInt()
         properties.setProperty("VERSION_PATCH", (currentPatch + 1).toString())
         properties.setProperty("BUILD_NUMBER", "1") // Reset build number
-        
+
         versionFile.outputStream().use { properties.store(it, null) }
         println("Incremented patch version to: ${currentPatch + 1}")
     }
@@ -171,18 +171,18 @@ tasks.register("incrementPatch") {
 tasks.register("incrementMinor") {
     group = "versioning"
     description = "Increments the minor version"
-    
+
     doLast {
         val versionFile = file("version.properties")
         val properties = Properties().apply {
             versionFile.inputStream().use { load(it) }
         }
-        
+
         val currentMinor = properties.getProperty("VERSION_MINOR", "0").toInt()
         properties.setProperty("VERSION_MINOR", (currentMinor + 1).toString())
         properties.setProperty("VERSION_PATCH", "0") // Reset patch
         properties.setProperty("BUILD_NUMBER", "1") // Reset build number
-        
+
         versionFile.outputStream().use { properties.store(it, null) }
         println("Incremented minor version to: ${currentMinor + 1}")
     }
@@ -220,9 +220,9 @@ Apply version increment only to specific build types:
 tasks.register("releaseBuild") {
     group = "build"
     description = "Builds a release version with incremented version"
-    
+
     dependsOn("incrementVersion", "build")
-    
+
     doLast {
         println("Release build completed with new version")
     }
@@ -231,9 +231,9 @@ tasks.register("releaseBuild") {
 tasks.register("developmentBuild") {
     group = "build"
     description = "Builds without incrementing version"
-    
+
     dependsOn("build")
-    
+
     doLast {
         println("Development build completed")
     }
@@ -283,9 +283,9 @@ subprojects {
     val versionProps = Properties().apply {
         rootProject.file("version.properties").inputStream().use { load(it) }
     }
-    
+
     version = "${versionProps["VERSION_MAJOR"]}.${versionProps["VERSION_MINOR"]}.${versionProps["VERSION_PATCH"]}.${versionProps["BUILD_NUMBER"]}"
-    
+
     // Apply version to all JAR tasks
     tasks.withType<Jar> {
         archiveVersion.set(version.toString())
@@ -316,16 +316,16 @@ Ensure all modules use the same version:
 tasks.register("updateAllVersions") {
     group = "versioning"
     description = "Updates version in all modules"
-    
+
     dependsOn("incrementVersion")
-    
+
     doLast {
         val versionProps = Properties().apply {
             file("version.properties").inputStream().use { load(it) }
         }
-        
+
         val newVersion = "${versionProps["VERSION_MAJOR"]}.${versionProps["VERSION_MINOR"]}.${versionProps["VERSION_PATCH"]}.${versionProps["BUILD_NUMBER"]}"
-        
+
         subprojects.forEach { subproject ->
             subproject.version = newVersion
             println("Updated ${subproject.name} to version: $newVersion")
@@ -371,7 +371,7 @@ if (isCi) {
                 val properties = Properties().apply {
                     versionFile.inputStream().use { load(it) }
                 }
-                
+
                 // Set GitHub Actions output
                 println("::set-output name=version::${properties["BUILD_NUMBER"]}")
             }
@@ -389,13 +389,13 @@ val currentBranch = System.getenv("GITHUB_REF_NAME") ?: "main"
 
 tasks.register("branchSpecificIncrement") {
     group = "versioning"
-    
+
     doLast {
         val versionFile = file("version.properties")
         val properties = Properties().apply {
             versionFile.inputStream().use { load(it) }
         }
-        
+
         when (currentBranch) {
             "main", "master" -> {
                 // Standard increment for main branch
@@ -426,13 +426,13 @@ Create a task to rollback version changes:
 tasks.register("rollbackVersion") {
     group = "versioning"
     description = "Rolls back the last version increment"
-    
+
     doLast {
         val versionFile = file("version.properties")
         val properties = Properties().apply {
             versionFile.inputStream().use { load(it) }
         }
-        
+
         val currentBuild = properties.getProperty("BUILD_NUMBER", "1").toInt()
         if (currentBuild > 1) {
             properties.setProperty("BUILD_NUMBER", (currentBuild - 1).toString())
@@ -453,24 +453,24 @@ Add validation to ensure version consistency:
 tasks.register("validateVersion") {
     group = "versioning"
     description = "Validates version properties"
-    
+
     doLast {
         val versionFile = file("version.properties")
         if (!versionFile.exists()) {
             throw GradleException("version.properties file not found")
         }
-        
+
         val properties = Properties().apply {
             versionFile.inputStream().use { load(it) }
         }
-        
+
         val requiredProperties = listOf("VERSION_MAJOR", "VERSION_MINOR", "VERSION_PATCH", "BUILD_NUMBER")
         val missingProperties = requiredProperties.filter { !properties.containsKey(it) }
-        
+
         if (missingProperties.isNotEmpty()) {
             throw GradleException("Missing required properties: ${missingProperties.joinToString(", ")}")
         }
-        
+
         // Validate numeric values
         requiredProperties.forEach { prop ->
             val value = properties.getProperty(prop)
@@ -480,7 +480,7 @@ tasks.register("validateVersion") {
                 throw GradleException("Property $prop must be a valid integer, got: $value")
             }
         }
-        
+
         println("Version properties validation passed")
     }
 }
@@ -499,26 +499,26 @@ Support for different version formats:
 tasks.register("generateSemanticVersion") {
     group = "versioning"
     description = "Generates semantic version string"
-    
+
     doLast {
         val versionFile = file("version.properties")
         val properties = Properties().apply {
             versionFile.inputStream().use { load(it) }
         }
-        
+
         val major = properties["VERSION_MAJOR"]
         val minor = properties["VERSION_MINOR"]
         val patch = properties["VERSION_PATCH"]
         val build = properties["BUILD_NUMBER"]
-        
+
         val semanticVersion = "$major.$minor.$patch"
         val fullVersion = "$major.$minor.$patch+$build"
         val shortVersion = "$major.$minor"
-        
+
         println("Semantic Version: $semanticVersion")
         println("Full Version: $fullVersion")
         println("Short Version: $shortVersion")
-        
+
         // Write to additional files
         file("version.txt").writeText(fullVersion)
         file("semantic-version.txt").writeText(semanticVersion)
@@ -534,22 +534,22 @@ Automatically tag releases with version information:
 tasks.register("tagRelease") {
     group = "versioning"
     description = "Tags the current commit with version"
-    
+
     dependsOn("incrementVersion")
-    
+
     doLast {
         val versionFile = file("version.properties")
         val properties = Properties().apply {
             versionFile.inputStream().use { load(it) }
         }
-        
+
         val version = "${properties["VERSION_MAJOR"]}.${properties["VERSION_MINOR"]}.${properties["VERSION_PATCH"]}"
         val tagName = "v$version"
-        
+
         exec {
             commandLine("git", "tag", "-a", tagName, "-m", "Release version $version")
         }
-        
+
         println("Created tag: $tagName")
     }
 }
@@ -609,7 +609,7 @@ Test your configuration changes:
 ```kotlin
 tasks.register("testVersionConfig") {
     group = "verification"
-    
+
     doLast {
         // Test version increment without actually changing files
         val testProps = Properties().apply {
@@ -618,7 +618,7 @@ tasks.register("testVersionConfig") {
             setProperty("VERSION_PATCH", "0")
             setProperty("BUILD_NUMBER", "1")
         }
-        
+
         val newBuild = testProps.getProperty("BUILD_NUMBER").toInt() + 1
         println("Test increment would result in build number: $newBuild")
     }
@@ -627,4 +627,4 @@ tasks.register("testVersionConfig") {
 
 ---
 
-*This configuration guide covers advanced VISTA usage scenarios. For basic usage, refer to the [Getting Started](./getting-started.md) guide.*
+_This configuration guide covers advanced VISTA usage scenarios. For basic usage, refer to the [Getting Started](./getting-started.md) guide._

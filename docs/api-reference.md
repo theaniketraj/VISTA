@@ -75,12 +75,12 @@ tasks.named("incrementVersion") {
 
 #### Error Handling
 
-| Condition | Behavior |
-|-----------|----------|
-| File not found | Logs warning message, task completes successfully |
-| Invalid number format | Uses default value of 0, then increments to 1 |
-| File permission error | Task fails with IOException |
-| Malformed properties file | Task fails with parsing exception |
+| Condition                 | Behavior                                          |
+| ------------------------- | ------------------------------------------------- |
+| File not found            | Logs warning message, task completes successfully |
+| Invalid number format     | Uses default value of 0, then increments to 1     |
+| File permission error     | Task fails with IOException                       |
+| Malformed properties file | Task fails with parsing exception                 |
 
 #### Output Examples
 
@@ -170,12 +170,12 @@ BUILD_NUMBER=1
 
 #### Property Specifications
 
-| Property | Type | Required | Default | Description |
-|----------|------|----------|---------|-------------|
-| `VERSION_MAJOR` | Integer | No | N/A | Major version number |
-| `VERSION_MINOR` | Integer | No | N/A | Minor version number |
-| `VERSION_PATCH` | Integer | No | N/A | Patch version number |
-| `BUILD_NUMBER` | Integer | Yes | 0 | Build number (auto-incremented) |
+| Property        | Type    | Required | Default | Description                     |
+| --------------- | ------- | -------- | ------- | ------------------------------- |
+| `VERSION_MAJOR` | Integer | No       | N/A     | Major version number            |
+| `VERSION_MINOR` | Integer | No       | N/A     | Minor version number            |
+| `VERSION_PATCH` | Integer | No       | N/A     | Patch version number            |
+| `BUILD_NUMBER`  | Integer | Yes      | 0       | Build number (auto-incremented) |
 
 #### Property Validation
 
@@ -459,12 +459,12 @@ tasks.register("buildDockerImage") {
 
 ### Exception Types
 
-| Exception | Cause | Handling |
-|-----------|-------|----------|
-| `FileNotFoundException` | version.properties not found | Warning logged, task continues |
-| `IOException` | File read/write error | Task fails with error message |
-| `NumberFormatException` | Invalid BUILD_NUMBER format | Defaults to 0, continues |
-| `SecurityException` | File permission denied | Task fails with permission error |
+| Exception               | Cause                        | Handling                         |
+| ----------------------- | ---------------------------- | -------------------------------- |
+| `FileNotFoundException` | version.properties not found | Warning logged, task continues   |
+| `IOException`           | File read/write error        | Task fails with error message    |
+| `NumberFormatException` | Invalid BUILD_NUMBER format  | Defaults to 0, continues         |
+| `SecurityException`     | File permission denied       | Task fails with permission error |
 
 ### Error Recovery
 

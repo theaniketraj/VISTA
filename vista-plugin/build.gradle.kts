@@ -12,9 +12,26 @@ plugins {
 group = "io.github.theaniketraj"
 version = "1.0.7"
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+    }
+}
+
+// Skip test task configuration since there are no tests
+tasks.withType<Test>().configureEach {
+    enabled = false
+}
+
 gradlePlugin {
-    website.set("https://github.com/theaniketraj/vista")
-    vcsUrl.set("https://github.com/theaniketraj/vista.git")
+    website.set("https://github.com/theaniketraj/VISTA")
+    vcsUrl.set("https://github.com/theaniketraj/VISTA.git")
 
     plugins {
         create("versioningPlugin") {

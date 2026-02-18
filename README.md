@@ -6,14 +6,21 @@
 
 ## Table of Contents
 
-1. [Features](#features)
-2. [Architecture & Internals](#architecture--internals)
-3. [Getting Started](#getting-started)
-4. [Usage](#usage)
-5. [Project Structure](#project-structure)
-6. [Versioning Philosophy](#versioning-philosophy)
-7. [Contributing](#contributing)
-8. [License](#license)
+- [VISTA](#vista)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Architecture \& Internals](#architecture--internals)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Environment Setup](#environment-setup)
+  - [Usage](#usage)
+    - [Applying the Plugin in Your Project](#applying-the-plugin-in-your-project)
+    - [Running the Version Increment Task](#running-the-version-increment-task)
+  - [Project Structure](#project-structure)
+    - [Key Points in the Structure](#key-points-in-the-structure)
+  - [Versioning Philosophy](#versioning-philosophy)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ---
 
@@ -73,6 +80,7 @@ VISTA is built as a Gradle plugin with the following key components:
    Avoid duplicate JDK folders and ensure `JAVA_HOME` points to a valid JDK, not a JRE.
 
 2. **Clone the Repository:**  
+
    ```bash
    git clone https://github.com/theaniketraj/VISTA.git
    cd VISTA
@@ -86,7 +94,9 @@ VISTA is built as a Gradle plugin with the following key components:
 ## Usage
 
 ### Applying the Plugin in Your Project
+
 To use VISTA in a Gradle project, add the following to your project's ```build.gradle.kts``` file:
+
 ```kotlin
 plugins {
     id("com.example.vista.versioning") version "1.0.0"
@@ -94,11 +104,15 @@ plugins {
 ```
 
 ### Running the Version Increment Task
+
 Simply run:
+
 ```bash
 ./gradlew incrementVersion
 ```
+
 This task will:
+
 - Look for a ```version.properties``` file in the root of your project.
 - Increment the ```BUILD_NUMBER``` property.
 - Save the updated version information.
@@ -106,6 +120,7 @@ This task will:
 ---
 
 ## Project Structure
+
 ```pgsql
 VISTA/
 ├── vista-plugin/                // VISTA Gradle Plugin module
@@ -129,7 +144,9 @@ VISTA/
 ├── README.md                    // This documentation file
 └── .gitignore                   // Git ignore settings
 ```
-### Key Points in the Structure:
+
+### Key Points in the Structure
+
 - vista-plugin/: Contains the source code and publishing configuration for the VISTA Gradle plugin.
 - version.properties: Maintains the current version details (used by VISTA to increment version numbers).
 - Gradle Wrapper & Settings: Ensure a consistent build environment and repository configuration
@@ -137,7 +154,9 @@ VISTA/
 ---
 
 ## Versioning Philosophy
+
 VISTA uses a simple yet robust versioning strategy:
+
 - Semantic Versioning:
 ```VERSION_MAJOR```,```VERSION_MINOR```,```VERSION_PATCH``` combined with an incrementing ```BUILD_NUMBER``` to create a complete version string.
 - Autumation:
@@ -148,7 +167,9 @@ Designed to work seamlessly with CI/CD pipelines for consistent version updates 
 ---
 
 ## Contributing
+
 Contributions are welcome! Please follow these guidelines:
+
 - Fork the Repository and create a new branch for your changes.
 - Ensure Code Quality:
 Adhere to the Kotlin code style (official) and ensure all tests pass.
@@ -158,4 +179,5 @@ Include a detailed description of your changes and follow the project's commit c
 ---
 
 ## License
+
 This project is licensed under the [MIT License](https://github.com/theaniketraj/VISTA/blob/main/LICENSE)
