@@ -2,7 +2,7 @@ pluginManagement {
     repositories {
         google {
             content {
-                includeGroupByRegex("com\\.android.*")  // Not strictly needed for a CLI plugin
+                includeGroupByRegex("com\\.android.*") // Not strictly needed for a CLI plugin
                 includeGroupByRegex("com\\.google.*")
                 includeGroupByRegex("androidx.*")
             }

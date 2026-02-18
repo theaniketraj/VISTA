@@ -2,31 +2,56 @@
 .gradle/
 build/
 */build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# IDEA / IntelliJ / Android Studio
+# Gradle Cache and Local Files
+.gradle
+local.properties
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# IntelliJ IDEA / Android Studio
 .idea/
-*.iml
+.idea
 *.iws
+*.iml
 *.ipr
 out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
 # Android
-local.properties
-captures/
-.externalNativeBuild/
-.cxx/
 *.apk
 *.ap_
 *.aab
+*.dex
+*.class
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Kotlin
+.kotlin/
+.kotlin
+*.kotlin_module
 
 # VS Code
 .vscode/
+.vscode
 *.code-workspace
+.history/
 vista-plugin/.vscode/
 
 # System
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# Kotlin
-.kotlin/
+# Log Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

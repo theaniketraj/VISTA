@@ -1,6 +1,5 @@
-import org.gradle.api.tasks.Copy
 import org.gradle.api.file.DuplicatesStrategy
-import com.gradle.publish.PluginBundleExtension
+import org.gradle.api.tasks.Copy
 
 plugins {
     `java-gradle-plugin`
@@ -24,8 +23,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     }
 }
 
-// Skip test task configuration since there are no tests
-tasks.withType<Test>().configureEach {
+tasks.named<Test>("test") {
     enabled = false
 }
 
