@@ -43,6 +43,35 @@ class VersioningPlugin : Plugin<Project> {
             default: Int = 0,
         ): Int = getProperty(key, default.toString()).toIntOrNull() ?: default
 
+        // Helper to get value from Env or Properties
+        fun getValue(
+            properties: Properties,
+            propKey: String,
+            envKey: String,
+            default: Int = 0,
+        ): Int {
+            val envVal = System.getenv(envKey)
+            if (envVal != null) {
+                return envVal.toIntOrNull() ?: default
+            }
+            return properties.getInt(propKey, default)
+        }
+
+        // Configure project version in afterEvaluate to allow extension configuration
+        target.afterEvaluate {
+            val versionFile = File(target.rootDir, extension.versionFileName.get())
+            val props = loadProperties(versionFile)
+
+            val major = getValue(props, "VERSION_MAJOR", "VISTA_VERSION_MAJOR")
+            val minor = getValue(props, "VERSION_MINOR", "VISTA_VERSION_MINOR")
+            val patch = getValue(props, "VERSION_PATCH", "VISTA_VERSION_PATCH")
+            val build = getValue(props, "BUILD_NUMBER", "VISTA_BUILD_NUMBER")
+
+            val versionString = "$major.$minor.$patch.$build"
+            target.version = versionString
+            println("VISTA: Project version set to $versionString")
+        }
+
         // Register tasks
         target.tasks.register("incrementMajor", DefaultTask::class.java) { task ->
             task.group = "versioning"
@@ -124,6 +153,8 @@ class VersioningPlugin : Plugin<Project> {
             task.group = "versioning"
             task.description = "Prints the current version string."
             task.doLast {
+                println("Project Version: ${target.version}")
+
                 val versionFile = File(target.rootDir, extension.versionFileName.get())
                 if (versionFile.exists()) {
                     val props = loadProperties(versionFile)
@@ -131,7 +162,7 @@ class VersioningPlugin : Plugin<Project> {
                     val minor = props.getInt("VERSION_MINOR")
                     val patch = props.getInt("VERSION_PATCH")
                     val build = props.getInt("BUILD_NUMBER")
-                    println("Current Version: $major.$minor.$patch.$build")
+                    println("File Version:    $major.$minor.$patch.$build")
                 } else {
                     println("Version file not found: ${versionFile.absolutePath}")
                 }
