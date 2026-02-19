@@ -37,13 +37,6 @@
   
 - **CI/CD and Plugin Portal Ready:**  
   Seamlessly integrates with GitHub Actions to build, test, and publish your plugin to the Gradle Plugin Portal.
-  
-- **Evolution from CEIE:**  
-  VISTA is the culmination of enhancements made across the CEIE series:
-  - **[CEIE 1.0](https://github.com/theaniketraj/git-setup-ceie):** Initial automation and Git-integrated version tracking.
-  - **[CEIE 2.0](https://github.com/theaniketraj/ceie):** Introduction of CLI tools and incremental version scaffolding.
-  - **CEIE 3.0:** TBD
-  - **CEIE 4.0:** Dedicated, streamlined CLI plugin—VISTA—for robust version management.
 
 ---
 
